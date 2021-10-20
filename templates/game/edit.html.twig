@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title 'Editer article #' ~ game.id %}
+
+{% block body %}
+
+	<h1>Editer l'article n° {{game.id}}</h1>
+
+	{{form_start(form)}}
+
+
+	{{form_widget(form)}}
+
+	<input type="submit" value="mettre a jour l'article">
+	{{form_end(form)}}
+
+
+{% endblock %}

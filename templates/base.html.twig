@@ -1,19 +1,101 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {# Run `composer require symfony/webpack-encore-bundle`
-           and uncomment the following Encore helpers to start using Symfony UX #}
-        {% block stylesheets %}
-            {#{{ encore_entry_link_tags('app') }}#}
-        {% endblock %}
+<html lang="fr">
+	<head>
 
-        {% block javascripts %}
-            {#{{ encore_entry_script_tags('app') }}#}
-        {% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-    </body>
-</html>
+		{{ render_esi(path('ch_cookie_consent.show_if_cookie_consent_not_set')) }}
+		{% include "@CHCookieConsent/cookie_consent_styling.html.twig" %}
+
+
+		<meta
+		charset="UTF-8">
+		<!-- Global site tag (gtag.js) - Google Analytics -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-1MG3C4PKYT"></script>
+		<script>
+			window.dataLayer = window.dataLayer || [];
+	function gtag() {
+	dataLayer.push(arguments);
+	}
+gtag('js', new Date());
+
+gtag('config', 'G-1MG3C4PKYT');
+		</script>
+		<title>
+			{% block title %}Welcome!
+			{% endblock %}
+		</title>
+		<link rel="preconnect" href="https://fonts.gstatic.com">
+		{% block stylesheets %}
+
+			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+			{{encore_entry_link_tags('app')}}
+
+		{% endblock %}
+
+
+		{% block javascripts %}
+
+			{{encore_entry_script_tags('app')}}
+
+		{% endblock %}
+	</head>
+	<body>
+		{% for type, messages in app.flashes %}
+			{% for message in messages %}
+				<div class="alert alert-{{type}}" role="alert">
+					{{message}}
+				</div>
+			{% endfor %}
+		{% endfor %}
+
+		<nav class="navbar navbar-expand-sm navbar-light bg-light mb-5" aria-label="Third navbar example">
+			<div class="container">
+				<a class="navbar-brand" href="{{path('app_home')}}">Gamingblog</a>
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample03" aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+
+				<div class="collapse navbar-collapse" id="navbarsExample03">
+					<ul class="navbar-nav ml-auto">
+
+						{% if app.user %}
+							<li class="nav-item">
+								<a class="nav-link  " aria-current="page" href="{{path('app_game_create')}}">Nouvel article</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="#">Compte</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link " href="#" onclick="event.preventDefault();
+								document.getElementById('js-logout-form').submit();">Deconnexion</a>
+							</li>
+								<form id="js-logout-form" action="{{ path('app_logout')}}" method="POST"style="display: none;">
+								<input type="hidden" value="{{csrf_token('logout')}}">
+								</form>
+						{% else %}
+
+							<li class="nav-item">
+								<a class="nav-link " href="{{ path ('app_register')}}">Inscription</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link " href="{{path('app_login') }}">Connexion</a>
+							</li>
+						{% endif %}
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<main role="main" class="container"> {% block body %}{% endblock %}
+			</main>
+
+		</body>
+
+		<footer class="container text-center mt-5">
+			<p class="text-muted">Site créer et développeé par
+				<a href="https://twitter.com/mdo">@EcksonDalmeida</a>.</p>
+			<p>
+				<a href="#">Back to top</a>
+			</p>
+		</footer>
+
+
+	</html>

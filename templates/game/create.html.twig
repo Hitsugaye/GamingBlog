@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title 'Nouvel article' %}
+
+{% block body %}
+
+	<div class="row">
+    <div class="col-md-6 mx-auto">
+	<h1>Creer un article</h1>
+
+	{{form_start(form)}}
+
+
+	{{form_widget(form)}}
+
+	<input type="submit" value="{{submitButtonText ?? 'Creer l\'article'}}" class="btn btn-primary btn-block"formnovalidate>
+	{{form_end(form)}}
+    
+    </div>
+</div>
+
+
+
+{% endblock %}

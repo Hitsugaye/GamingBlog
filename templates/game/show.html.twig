@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title game.titre %}
+
+{% block body %}
+	<div class="row">
+		<div class="col-md-10 mx-auto">
+
+			<article class="game bg-white rounded shadow">
+
+				<div class="mw-100 overflow-hidden">
+
+					<a href="{{ path('app_game_show', {id: game.id})}}">
+
+						<img src="{{ (game.imageName ? vich_uploader_asset(game) : asset('image/default_image.jpg')) |imagine_filter('squared_thumbnail_medium') }}" alt="{{ game.titre }}" class="w-100 rounded-top"/>
+					</a>
+
+				</div>
+
+				<p class="pl-3 pb-3 text-muted">
+					<small>
+						Ecrit par
+						{{ game.user.firstname }}
+					</small>
+				</p>
+				<p class="pl-3  pb-3 text-break">
+					{{game.description}}
+				</p>
+
+				<div class="pl-3 pb-3">
+
+					<a href="{{ path('app_game_edit', {id: game.id})}}" class="btn btn-light">Editer</a> 
+
+					<a href="{{ path('app_game_delete', {id: game.id})}}" class="btn btn-light">Supprimer</a>
+
+				</div>
+			</article>
+
+		</div>
+	</div>
+
+
+{% endblock %}

@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');
+@import "~bootstrap/scss/bootstrap";
+
+body {
+    background-color: rgb(125, 128, 129);
+    font-family: 'Rubik', sans-serif;
+}
+
+
+    .alert {
+
+        padding: 10px;
+        color: white;
+        text-align: center;
+        margin: 0;
+        border: none;
+        border-radius: 0;
+
+        &.alert-success {
+            background-color: green;
+        }
+    
+        &.alert-error {
+            background-color: red;
+        }
+    
+        &.alert-info {
+            background-color: blue;
+        }
+        
+    }
+
+    .vich-image img{
+        @extend .mb-2;
+        @extend .rounded;
+        @extend .shadow;
+        @extend .img-thumbnail;
+    }
+
+    .game img{
+        transition: transform 0.3s ease-out;
+        &:hover{
+            transform: scale(1.075);
+        }
+    }
+
+
+          
+        
+    
+    
+      
